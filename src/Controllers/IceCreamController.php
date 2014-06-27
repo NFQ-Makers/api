@@ -39,7 +39,7 @@ class IceCreamController
      * @param $userId
      * @return JsonResponse
      */
-    public function userStatus($userId)
+    public function userHistoryByUserId($userId)
     {
         $result = [];
         $data   = $this->iceCreamService->getUserStatusByUserId($userId);
