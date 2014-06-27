@@ -27,6 +27,6 @@ class IceCreamObserver extends Observer
      */
     function subjectActionIceCream($subject)
     {
-        $this->iceCreamService->processEvents();
+        $this->iceCreamService->processEvent($subject->getEventId());
     }
 }

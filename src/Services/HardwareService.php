@@ -34,14 +34,14 @@ class HardwareService extends Subject
 
         // array of events
         foreach ($requestData as $event) {
-            $this->eventRepository->insert(
+            $eventId = $this->eventRepository->insert(
                 $event['time']['sec'],
                 $event['type'],
                 json_encode($event['data']),
                 $event['deviceId']
             );
             // call observers
-            $this->setState($event['type']);
+            $this->setState($event['type'], $eventId);
         }
     }
 

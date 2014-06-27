@@ -11,6 +11,7 @@ abstract class Subject
     {
         $this->observers = array();
         $this->state = null;
+        $this->eventId = null;
     }
 
     /**
@@ -52,13 +53,25 @@ abstract class Subject
     }
 
     /**
+     * Return subject's event ID
+     *
+     * @return null
+     */
+    public function getEventId()
+    {
+        return $this->eventId;
+    }
+
+    /**
      * Set subject's state
      *
      * @param $state
+     * @param $eventId
      */
-    public function setState($state)
+    public function setState($state, $eventId)
     {
         $this->state = $state;
+        $this->eventId = $eventId;
         $this->notify();
     }
 

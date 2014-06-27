@@ -50,6 +50,7 @@ class EventRepository
         ];
 
         $this->connection->insert($this->tableName, $modelData);
+        return $this->connection->lastInsertId();
     }
 
     public function getNotProcessedByType($types)
@@ -65,6 +66,17 @@ class EventRepository
             $data = $this->connection->fetchAll($sql);
         }
         return $data;
+    }
+
+    public function getById($eventId)
+    {
+        $stmt = $this->connection->prepare("SELECT * FROM {$this->tableName} WHERE id = :eventId");
+        $stmt->bindValue("eventId", $eventId);
+        if (!$stmt->execute()) {
+            throw new \Exception('EventRepository: Error with executing query 2.');
+        }
+        $values = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $values;
     }
 
     public function markAsProcessed($id)

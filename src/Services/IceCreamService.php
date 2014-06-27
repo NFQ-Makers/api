@@ -39,4 +39,14 @@ class IceCreamService
             }
         }
     }
+
+    public function processEvent($eventId)
+    {
+        if ($event = $this->eventRepository->getById($eventId))
+        {
+            $itemData = json_decode($event['data']);
+            $this->iceCreamRepository->insert($itemData->userId, $event["deviceId"], $itemData->amount, $event["timestamp"]);
+            $this->eventRepository->markAsProcessed($event['id']);
+        }
+    }
 }
