@@ -9,8 +9,7 @@ namespace Providers;
 
 use Controllers\HardwareController;
 use Observers\IceCreamObserver;
-use Observers\TableObserver;
-use Repositories\EventRepository;
+use Observers\SoccerObserver;
 use Services\HardwareService;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
@@ -50,7 +49,7 @@ class HardwareProvider implements ServiceProviderInterface
         $app['hardware.service'] = $app->share(
             function () use ($app) {
                 $service = new HardwareService($app['event.repository']);
-                $service->attach(new TableObserver($app['event.repository']));
+                $service->attach(new SoccerObserver($app['soccer.service']));
                 $service->attach(new IceCreamObserver($app['iceCream.service']));
                 return $service;
             }

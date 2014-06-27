@@ -12,7 +12,7 @@ use Repositories\EventRepository;
 use Repositories\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class TableService
+class SoccerService
 {
     /**
      * @var EventRepository

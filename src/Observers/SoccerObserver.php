@@ -3,13 +3,17 @@ namespace Observers;
 
 use Observers\Observer;
 
-class TableObserver extends Observer
+class SoccerObserver extends Observer
 {
-    protected $eventRepository;
 
-    public function __construct($eventRepository)
+    /**
+     * @var $soccerService \Services\SoccerService
+     */
+    protected $soccerService;
+
+    public function __construct($soccerService)
     {
-        $this->eventRepository = $eventRepository;
+        $this->soccerService = $soccerService;
     }
 
     /**

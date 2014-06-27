@@ -64,7 +64,7 @@ $app['event.repository'] = $app->share(
     }
 );
 
-$app->register(new \Providers\TableProvider());
+$app->register(new \Providers\SoccerProvider());
 
 $app->register(new \Providers\UserProvider());
 

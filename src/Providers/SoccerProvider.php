@@ -8,13 +8,13 @@
 
 namespace Providers;
 
-use Controllers\TableController;
+use Controllers\SoccerController;
 use Repositories\UserRepository;
-use Services\TableService;
+use Services\SoccerService;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
-class TableProvider implements ServiceProviderInterface
+class SoccerProvider implements ServiceProviderInterface
 {
     /**
      * @inherit
@@ -47,9 +47,9 @@ class TableProvider implements ServiceProviderInterface
      */
     protected function registerServices(Application $app)
     {
-        $app['table.service'] = $app->share(
+        $app['soccer.service'] = $app->share(
             function () use ($app) {
-                $service = new TableService($app['event.repository'], $app['user.repository']);
+                $service = new SoccerService($app['event.repository'], $app['user.repository']);
                 return $service;
             }
         );
@@ -96,7 +96,7 @@ class TableProvider implements ServiceProviderInterface
     {
         $app['page.controller'] = $app->share(
             function () use ($app) {
-                return new TableController($app['twig'], $app['table.service']);
+                return new SoccerController($app['twig'], $app['soccer.service']);
             }
         );
     }

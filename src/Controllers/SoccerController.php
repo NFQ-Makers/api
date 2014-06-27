@@ -12,7 +12,7 @@ use Services\TableService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Yaml\Yaml;
 
-class TableController
+class SoccerController
 {
     /**
      * @var \Twig_Environment
@@ -22,16 +22,16 @@ class TableController
     /**
      * @var TableService
      */
-    protected $tableService;
+    protected $soccerService;
 
     /**
      * @param $twigService
-     * @param $tableService
+     * @param $soccerService
      */
-    public function __construct($twigService, $tableService)
+    public function __construct($twigService, $soccerService)
     {
         $this->twig = $twigService;
-        $this->tableService = $tableService;
+        $this->soccerService = $soccerService;
     }
 
     /**
@@ -55,6 +55,6 @@ class TableController
      */
     public function status()
     {
-        return $this->tableService->getTableStatus();
+        return $this->soccerService->getTableStatus();
     }
 }
