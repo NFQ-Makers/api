@@ -63,12 +63,6 @@ class TableProvider implements ServiceProviderInterface
      */
     protected function registerRepositories(Application $app)
     {
-        $app['user.repository'] = $app->share(
-            function () use ($app) {
-                $repository = new UserRepository($app['db']);
-                return $repository;
-            }
-        );
     }
 
     /**

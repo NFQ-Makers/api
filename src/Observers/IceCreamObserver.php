@@ -7,23 +7,17 @@ use Repositories\IceCreamRepository;
 class IceCreamObserver extends Observer
 {
     /**
-     * @var $eventRepository \Repositories\EventRepository.php
+     * @var $iceCreamService \Services\IceCreamService
      */
-    protected $eventRepository;
+    protected $iceCreamService;
+
 
     /**
-     * @var $iceCreamRepository \Repositories\IceCreamRepository
+     * @param null $iceCreamService
      */
-    protected $iceCreamRepository;
-
-    /**
-     * @param null $eventRepository
-     * @param $iceCreamRepository
-     */
-    public function __construct($eventRepository, $iceCreamRepository)
+    public function __construct($iceCreamService)
     {
-        $this->eventRepository = $eventRepository;
-        $this->iceCreamRepository = $iceCreamRepository;
+        $this->iceCreamService = $iceCreamService;
     }
 
     /**
@@ -33,13 +27,6 @@ class IceCreamObserver extends Observer
      */
     function subjectActionIceCream($subject)
     {
-        if ($data = $this->eventRepository->getNotProcessedByType(\Models\IceCream::getTypes()))
-        {
-            foreach ($data as $item) {
-                $itemData = json_decode($item['data']);
-                $this->iceCreamRepository->insert($itemData->userId, $item["deviceId"], $itemData->amount, $item["timestamp"]);
-                $this->eventRepository->markAsProcessed($item['id']);
-            }
-        }
+        $this->iceCreamService->processEvents();
     }
 }

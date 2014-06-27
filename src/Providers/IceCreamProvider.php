@@ -57,7 +57,7 @@ class IceCreamProvider implements ServiceProviderInterface
     {
         $app['iceCream.service'] = $app->share(
             function () use ($app) {
-                $service = new IceCreamService($app['iceCream.repository']);
+                $service = new IceCreamService($app['iceCream.repository'], $app['event.repository']);
                 return $service;
             }
         );

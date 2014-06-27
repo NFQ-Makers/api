@@ -51,7 +51,7 @@ class HardwareProvider implements ServiceProviderInterface
             function () use ($app) {
                 $service = new HardwareService($app['event.repository']);
                 $service->attach(new TableObserver($app['event.repository']));
-                $service->attach(new IceCreamObserver($app['event.repository'], $app['iceCream.repository']));
+                $service->attach(new IceCreamObserver($app['iceCream.service']));
                 return $service;
             }
         );
