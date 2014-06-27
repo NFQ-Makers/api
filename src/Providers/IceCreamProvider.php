@@ -19,6 +19,7 @@ class IceCreamProvider implements ServiceProviderInterface
     {
         $app['iceCream.path.userStatus'] = '/api/v1/iceCream/userStatus/{userId}';
         $app['iceCream.path.userInfoByRfid'] = '/api/v1/iceCream/userInfoByRfid/{rfid}';
+        $app['iceCream.path.userHistoryByRfid'] = '/api/v1/iceCream/userHistoryByRfid/{rfid}';
         $this->registerRepositories($app);
         $this->registerServices($app);
         $this->registerControllers($app);
@@ -95,6 +96,11 @@ class IceCreamProvider implements ServiceProviderInterface
         $app->get(
             $app['config']['path_prefix'] . $app['iceCream.path.userInfoByRfid'],
             'iceCream.controller:userInfoByRfid'
+        );
+
+        $app->get(
+            $app['config']['path_prefix'] . $app['iceCream.path.userHistoryByRfid'],
+            'iceCream.controller:userHistoryByRfid'
         );
     }
 }

@@ -2,6 +2,7 @@
 namespace Controllers;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class IceCreamController
 {
@@ -60,7 +61,7 @@ class IceCreamController
      * @param $rfid
      * @return JsonResponse
      */
-    public function userInfoByRfid($rfid)
+    public function userHistoryByRfid($rfid)
     {
         $user = $this->userService->getUserInfoByCardNumber($rfid);
 
@@ -74,6 +75,33 @@ class IceCreamController
             $result["history"][$id]['amount']    = $item->getAmount();
             $result["history"][$id]['timestamp'] = $item->getTimestamp();
         }
+
+        return new JsonResponse($result, 200);
+    }
+
+    /**
+     * Return user iceCream activity by given user rfid
+     *
+     * @param Request $request
+     * @param $rfid
+     * @return JsonResponse
+     */
+    public function userInfoByRfid(Request $request, $rfid)
+    {
+        $user = $this->userService->getUserInfoByCardNumber($rfid);
+
+        if ($user["img"]) {
+            $user["img"] = $request->getUriForPath('/img/players/' . $user["img"]);
+        }
+
+        $result = ["user" => $user];
+        $data   = $this->iceCreamService->getUserStatusByUserId($user['id']);
+        $total  = 0;
+        foreach ($data as $item) {
+            $total += $item->getAmount();
+        }
+        $result["info"]["totalAmount"] = $total;
+        $result["info"]["text"] = "Jau esi suvalgęs <span class='number'>{$total}</span> ledų!";
 
         return new JsonResponse($result, 200);
     }
