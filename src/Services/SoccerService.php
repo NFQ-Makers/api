@@ -142,4 +142,30 @@ class SoccerService
 
         return ["img" => $user->getUserId() . '.png', "name" => $user->getFirstName()];
     }
+
+    protected function getSoccerMatchId($deviceId)
+    {
+        //TODO
+    }
+
+    public function processEventAutoGoal($eventId)
+    {
+        if ($event = $this->eventRepository->getById($eventId)) {
+            $matchId = $this->getSoccerMatchId($event['deviceId']);
+        }
+    }
+
+    public function processEventCardSwipe($eventId)
+    {
+        if ($event = $this->eventRepository->getById($eventId)) {
+
+        }
+    }
+
+    public function processEventTableShake($eventId)
+    {
+        if ($event = $this->eventRepository->getById($eventId)) {
+
+        }
+    }
 }

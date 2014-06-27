@@ -70,3 +70,20 @@ INSERT INTO `user_card` VALUES (1,-1,0,'');
 INSERT INTO `user_card` VALUES (2,0,1,'');
 /*!40000 ALTER TABLE `user_card` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `soccer_match`
+--
+
+CREATE TABLE IF NOT EXISTS `soccer_match` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `teamId1` int(11) NOT NULL,
+  `teamId2` int(11) NOT NULL,
+  `teamResult1` int(11) NOT NULL,
+  `teamResult2` int(11) NOT NULL,
+  `startTime` int(11) NOT NULL,
+  `lastShake` int(11) NOT NULL,
+  `deviceId` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

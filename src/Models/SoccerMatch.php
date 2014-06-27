@@ -24,17 +24,32 @@ class SoccerMatch extends BaseModel
     /**
      * @var int
      */
-    protected $team1Result;
+    protected $teamResult1;
 
     /**
      * @var int
      */
-    protected $team2Result;
+    protected $teamResult2;
+
+    /**
+     * @var int
+     */
+    protected $startTime;
+
+    /**
+     * @var int
+     */
+    protected $lastShake;
+
+    /**
+     * @var int
+     */
+    protected $deviceId;
 
     /**
      * @var string
      */
-    protected $startTime;
+    protected $status;
 
     /**
      * @param $teamId1
@@ -74,39 +89,39 @@ class SoccerMatch extends BaseModel
     }
 
     /**
-     * @param $team1Result
+     * @param $teamResult1
      * @return $this
      */
-    public function setTeam1Result($team1Result)
+    public function setTeamResult1($teamResult1)
     {
-        $this->team1Result = $team1Result;
+        $this->teamResult1 = $teamResult1;
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getTeam1Result()
+    public function getTeamResult1()
     {
-        return $this->team1Result;
+        return $this->teamResult1;
     }
 
     /**
-     * @param $team2Result
+     * @param $teamResult2
      * @return $this
      */
-    public function setTeam2Result($team2Result)
+    public function setTeamResult2($teamResult2)
     {
-        $this->team2Result = $team2Result;
+        $this->teamResult2 = $teamResult2;
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getTeam2Result()
+    public function getTeamResult2()
     {
-        return $this->team2Result;
+        return $this->teamResult2;
     }
 
     /**
@@ -125,6 +140,60 @@ class SoccerMatch extends BaseModel
     public function getStartTime()
     {
         return $this->startTime;
+    }
+
+    /**
+     * @param $lastShake
+     * @return $this
+     */
+    public function setLastShake($lastShake)
+    {
+        $this->lastShake = $lastShake;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastShake()
+    {
+        return $this->lastShake;
+    }
+
+    /**
+     * @param $deviceId
+     * @return $this
+     */
+    public function setDeviceId($deviceId)
+    {
+        $this->deviceId = $deviceId;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeviceId()
+    {
+        return $this->deviceId;
+    }
+
+    /**
+     * @param $status
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**

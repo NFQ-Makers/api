@@ -23,7 +23,7 @@ class SoccerObserver extends Observer
      */
     public function subjectActionAutoGoal($subject)
     {
-
+        $this->soccerService->processEventAutoGoal($subject->getEventId());
     }
 
     /**
@@ -33,7 +33,7 @@ class SoccerObserver extends Observer
      */
     public function subjectActionCardSwipe($subject)
     {
-
+        $this->soccerService->processEventCardSwipe($subject->getEventId());
     }
 
     /**
@@ -43,6 +43,6 @@ class SoccerObserver extends Observer
      */
     public function subjectActionTableShake($subject)
     {
-
+        $this->soccerService->processEventTableShake($subject->getEventId());
     }
 }
