@@ -101,7 +101,7 @@ class IceCreamController
             $total += $item->getAmount();
         }
         $result["info"]["totalAmount"] = $total;
-        $result["info"]["text"] = "Jau esi suvalgęs <span class='number'>{$total}</span> ledų!";
+        $result["info"]["text"] = "Kai už lango taip karšta, norisi šaltų ledų porcijos, gal dviejų? :)";
 
         return new JsonResponse($result, 200);
     }
