@@ -101,10 +101,12 @@ class IceCreamController
             $total += $item->getAmount();
         }
 
-        $iceCount = $this->iceCreamService->getIceCountByUserCardNumber($rfid);
+        $counts = $this->iceCreamService->getIceCountByUserCardNumber($rfid);
 
         $result["info"]["totalAmount"] = $total;
-        $result["info"]["text"] = "Kai už lango taip karšta, norisi šaltų ledų porcijos, gal dviejų? :) " . $iceCount;
+        $result["info"]["text"] = "Kai už lango taip karšta, norisi šaltų ledų porcijos, gal dviejų? :)".
+            ' Suvalgei dar tik <b>' .
+            $counts['userCount'] . "</b>. Pavyk kolegą, kuris jau suėdė " . $counts['max'];
 
         return new JsonResponse($result, 200);
     }

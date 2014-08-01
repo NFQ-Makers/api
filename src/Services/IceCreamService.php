@@ -30,7 +30,8 @@ class IceCreamService
 
     public function getIceCountByUserCardNumber($userId)
     {
-        $data = $this->iceCreamRepository->getIceCountByUserCardNumber($userId);
+        $data['userCount'] = $this->iceCreamRepository->getIceCountByUserCardNumber($userId);
+        $data['max'] = $this->iceCreamRepository->getIceMax();
         return $data;
     }
 

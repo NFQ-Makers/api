@@ -69,7 +69,23 @@ class IceCreamRepository
         }
 
         return $result;
+    }
 
+    public function getIceMax()
+    {
+        $sql = "SELECT MAX(`count`) AS max FROM ice_counts";
+        $stmt           = $this->connection->prepare($sql);
+        if (!$stmt->execute()) {
+            throw new \Exception('IceCreamRepository: Error with executing query 2.');
+        }
+
+        $result = 0;
+        $values = $stmt->fetchall(\PDO::FETCH_ASSOC);
+        foreach ($values as $item) {
+            $result = $item['max'];
+        }
+
+        return $result;
     }
 
     public function insert($userId, $deviceId, $amount, $timestamp)
