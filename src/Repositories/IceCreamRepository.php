@@ -52,6 +52,26 @@ class IceCreamRepository
         return $result;
     }
 
+    public function getIceCountByUserCardNumber($rfId)
+    {
+        $sql = "SELECT * FROM ice_counts WHERE user = :rfId";
+        $stmt           = $this->connection->prepare($sql);
+        $stmt->bindValue("rfId", $rfId);
+
+        if (!$stmt->execute()) {
+            throw new \Exception('IceCreamRepository: Error with executing query 2.');
+        }
+
+        $result = 0;
+        $values = $stmt->fetchall(\PDO::FETCH_ASSOC);
+        foreach ($values as $item) {
+            $result += $item['count'];
+        }
+
+        return $result;
+
+    }
+
     public function insert($userId, $deviceId, $amount, $timestamp)
     {
         $modelData = [

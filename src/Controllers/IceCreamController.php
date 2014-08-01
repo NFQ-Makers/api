@@ -100,8 +100,11 @@ class IceCreamController
         foreach ($data as $item) {
             $total += $item->getAmount();
         }
+
+        $iceCount = $this->iceCreamService->getIceCountByUserCardNumber($rfid);
+
         $result["info"]["totalAmount"] = $total;
-        $result["info"]["text"] = "Kai už lango taip karšta, norisi šaltų ledų porcijos, gal dviejų? :)";
+        $result["info"]["text"] = "Kai už lango taip karšta, norisi šaltų ledų porcijos, gal dviejų? :) " . $iceCount;
 
         return new JsonResponse($result, 200);
     }

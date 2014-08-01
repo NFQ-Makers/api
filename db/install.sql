@@ -87,3 +87,12 @@ CREATE TABLE IF NOT EXISTS `soccer_match` (
   `status` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+--
+-- Create View for group event log data
+--
+CREATE VIEW `ice_counts`
+AS SELECT
+   sum(substr(`ev`.`data`,11,1)) AS `count`,substring_index(substring_index(`ev`.`data`,'"',-(2)),'"',1) AS `user`
+FROM `events_log` AS `ev` group by substring_index(substring_index(`ev`.`data`,'"',-(2)),'"',1);

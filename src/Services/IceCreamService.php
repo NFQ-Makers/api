@@ -28,6 +28,12 @@ class IceCreamService
         return $data;
     }
 
+    public function getIceCountByUserCardNumber($userId)
+    {
+        $data = $this->iceCreamRepository->getIceCountByUserCardNumber($userId);
+        return $data;
+    }
+
     public function processEvents()
     {
         if ($data = $this->eventRepository->getNotProcessedByType(\Models\IceCream::getTypes()))
