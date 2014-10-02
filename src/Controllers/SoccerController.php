@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Darius
- * Date: 14.5.17
- * Time: 23.26
- */
 
 namespace Controllers;
 
@@ -58,6 +52,11 @@ class SoccerController
         return $this->soccerService->getTableStatus();
     }
 
+    /**
+     * Quick status of remote table
+     *
+     * @return mixed
+     */
     public function quickstatus()
     {
         return $this->twig->render('quickstatus.twig');

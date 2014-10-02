@@ -11,7 +11,7 @@
         <div class="table-busy">
             <img src="web/img/icon-ball.png" alt="" />
             <p class="main-line">Stalas užimtas :(</p>
-            <p class="subline">Teks truputį pakentėt</p>
+            <p class="subline">Teks truputį pakentėti</p>
         </div>
         <div class="table-offiline">
             <img src="web/img/icon-table-free.png" alt="" />
@@ -19,13 +19,12 @@
             <p class="subline">Kvieskite pagalbą!</p>
         </div>
     </div>
-    <div id="status"></div>
 {% endblock %}
 
 {% block javascript %}
     <script>
         var getStatus = function() {
-            $.getJSON( "http://wonderwall.ox.nfq.lt/kickertable/api/v1/status", function(data) {
+            $.getJSON( "http://wonderwall.php54.ox.nfq.lt/kickertable/api/v1/status", function(data) {
                 if (data.table == 'busy') {
                     $("#kicker-table .table-free").hide();
                     $("#kicker-table .table-busy").show();
@@ -40,7 +39,7 @@
                     $("#kicker-table .table-busy").hide();
                     $("#kicker-table .table-offiline").show();
                 });
-            setTimeout(getStatus, 1000);
+            setTimeout(getStatus, 3000);
         };
         getStatus();
     </script>

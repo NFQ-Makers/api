@@ -131,16 +131,14 @@ body {
     margin: 0;
 }
 
-#kicker-table .table-free {
+#kicker-table .table-free,
+#kicker-table .table-busy,
+#kicker-table .table-offline{
     display: none;
     position: absolute;
     top: 240px;
     left: 0;
     right: 0;
-}
-
-#kicker-table .table-busy {
-    display: none;
 }
 
 #kicker-table .table-busy .left-connector {
