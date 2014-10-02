@@ -25,6 +25,7 @@ class SoccerProvider implements ServiceProviderInterface
     {
         $app['page.path.start_page'] = '/';
         $app['page.path.status_json'] = '/api/v1/status';
+        $app['page.path.kickertable'] = '/kickertable';
 
         $this->registerRepositories($app);
         $this->registerServices($app);
@@ -84,6 +85,13 @@ class SoccerProvider implements ServiceProviderInterface
             $app['config']['path_prefix'] . $app['page.path.status_json'],
             'page.controller:status'
         );
+
+        // kickertable quick status
+        $app->get(
+            $app['config']['path_prefix'] . $app['page.path.kickertable'],
+            'page.controller:quickstatus'
+        );
+
     }
 
     /**

@@ -57,4 +57,9 @@ class SoccerController
     {
         return $this->soccerService->getTableStatus();
     }
+
+    public function quickstatus()
+    {
+        return $this->twig->render('quickstatus.twig');
+    }
 }

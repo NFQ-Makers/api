@@ -1,0 +1,47 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+    <div id="kicker-table">
+        <img src="web/img/soccer-field.png" alt="" />
+        <div class="table-free">
+            <img src="web/img/icon-table-free.png" alt="" />
+            <p class="main-line">Stalas laisvas!</p>
+            <p class="subline">Eik ir žaisk</p>
+        </div>
+        <div class="table-busy">
+            <img src="web/img/icon-ball.png" alt="" />
+            <p class="main-line">Stalas užimtas :(</p>
+            <p class="subline">Teks truputį pakentėt</p>
+        </div>
+        <div class="table-offiline">
+            <img src="web/img/icon-table-free.png" alt="" />
+            <p class="main-line">Stalas išjungtas :|</p>
+            <p class="subline">Kvieskite pagalbą!</p>
+        </div>
+    </div>
+    <div id="status"></div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        var getStatus = function() {
+            $.getJSON( "http://wonderwall.ox.nfq.lt/kickertable/api/v1/status", function(data) {
+                if (data.table == 'busy') {
+                    $("#kicker-table .table-free").hide();
+                    $("#kicker-table .table-busy").show();
+                    $("#kicker-table .table-offiline").hide();
+                } else if(data.table == 'free') {
+                    $("#kicker-table .table-busy").hide();
+                    $("#kicker-table .table-free").show();
+                    $("#kicker-table .table-offiline").hide();
+                }
+            }).fail(function() {
+                    $("#kicker-table .table-free").hide();
+                    $("#kicker-table .table-busy").hide();
+                    $("#kicker-table .table-offiline").show();
+                });
+            setTimeout(getStatus, 1000);
+        };
+        getStatus();
+    </script>
+{% endblock %}
