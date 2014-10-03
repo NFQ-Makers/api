@@ -28,16 +28,16 @@
                 if (data.table == 'busy') {
                     $("#kicker-table .table-free").hide();
                     $("#kicker-table .table-busy").show();
-                    $("#kicker-table .table-offiline").hide();
+                    $("#kicker-table .table-offline").hide();
                 } else if(data.table == 'free') {
                     $("#kicker-table .table-busy").hide();
                     $("#kicker-table .table-free").show();
-                    $("#kicker-table .table-offiline").hide();
+                    $("#kicker-table .table-offline").hide();
                 }
             }).fail(function() {
                     $("#kicker-table .table-free").hide();
                     $("#kicker-table .table-busy").hide();
-                    $("#kicker-table .table-offiline").show();
+                    $("#kicker-table .table-offline").show();
                 });
             setTimeout(getStatus, 3000);
         };
