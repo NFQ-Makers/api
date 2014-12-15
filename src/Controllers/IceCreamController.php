@@ -63,6 +63,7 @@ class IceCreamController
      */
     public function userHistoryByRfid($rfid)
     {
+        $rfid = ltrim($rfid, "0");
         $user = $this->userService->getUserInfoByCardNumber($rfid);
 
         $result = ["user" => $user];
@@ -88,6 +89,7 @@ class IceCreamController
      */
     public function userInfoByRfid(Request $request, $rfid)
     {
+        $rfid = ltrim($rfid, "0");
         $user = $this->userService->getUserInfoByCardNumber($rfid);
 
         if ($user["img"]) {
