@@ -88,7 +88,7 @@ class IceCreamRepository
         $result = 0;
         $values = $stmt->fetchall(\PDO::FETCH_ASSOC);
         foreach ($values as $item) {
-            $result = $item['max'];
+            $result = $item['count'];
         }
 
         return $result;
