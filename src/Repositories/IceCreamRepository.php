@@ -73,8 +73,14 @@ class IceCreamRepository
 
     public function getIceMax()
     {
-        $sql = "SELECT MAX(`count`) AS max FROM ice_counts";
-        $stmt           = $this->connection->prepare($sql);
+        $sql = "SELECT SUM(count) AS count FROM ice_counts
+                LEFT JOIN user_card ON ice_counts.user = user_card.cardNumber
+                WHERE userId IS NOT NULL
+                GROUP BY userId
+                ORDER BY count DESC
+                LIMIT 1";
+
+        $stmt = $this->connection->prepare($sql);
         if (!$stmt->execute()) {
             throw new \Exception('IceCreamRepository: Error with executing query 2.');
         }
