@@ -106,7 +106,7 @@ class IceCreamController
         $counts = $this->iceCreamService->getIceCountByUserCardNumber($rfid);
 
         $result["info"]["totalAmount"] = $total;
-        $result["info"]["text"] = "Artėja didžiausios metų šventės, ar jauti? Gal ledų? :) Suvalgei dar tik <b>" .
+        $result["info"]["text"] = "Nors ir šalta už lango, bet gal ledų? :) Suvalgei dar tik <b>" .
             $counts['userCount'] . "</b>. Pavyk kolegą, kuris jau suėdė " . $counts['max'];
 
         return new JsonResponse($result, 200);
