@@ -52,11 +52,11 @@ class IceCreamRepository
         return $result;
     }
 
-    public function getIceCountByUserCardNumber($rfId)
+    public function getIceCountByUserId($userId)
     {
-        $sql = "SELECT * FROM ice_counts WHERE user = :rfId";
-        $stmt           = $this->connection->prepare($sql);
-        $stmt->bindValue("rfId", $rfId);
+        $sql = "SELECT count as amount FROM ice_counts WHERE user IN (SELECT cardNumber FROM user_card WHERE userId = :userId);";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue("userId", $userId);
 
         if (!$stmt->execute()) {
             throw new \Exception('IceCreamRepository: Error with executing query 2.');
