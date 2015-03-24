@@ -54,7 +54,7 @@ class IceCreamRepository
 
     public function getIceCountByUserId($userId)
     {
-        $sql = "SELECT count as amount FROM ice_counts WHERE user IN (SELECT cardNumber FROM user_card WHERE userId = :userId);";
+        $sql = "SELECT count FROM ice_counts WHERE user IN (SELECT cardNumber FROM user_card WHERE userId = :userId);";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindValue("userId", $userId);
 
