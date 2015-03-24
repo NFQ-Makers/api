@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `soccer_match` (
 --
 -- Create View for group event log data
 --
-CREATE VIEW `ice_counts`
+CREATE ALGORITHM=UNDEFINED DEFINER=`maker`@`localhost` SQL SECURITY DEFINER VIEW `ice_counts`
 AS SELECT
-   sum(substr(`ev`.`data`,11,1)) AS `count`,substring_index(substring_index(`ev`.`data`,'"',-(2)),'"',1) AS `user`
-FROM `events_log` AS `ev` group by substring_index(substring_index(`ev`.`data`,'"',-(2)),'"',1);
+   sum(substr(`ev`.`data`,11,1)) AS `count`,trim(leading '0'
+FROM substring_index(substring_index(`ev`.`data`,'"',-(2)),'"',1)) AS `user` from `events_log` `ev` group by substring_index(substring_index(`ev`.`data`,'"',-(2)),'"',1);
