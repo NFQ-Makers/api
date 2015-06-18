@@ -56,4 +56,9 @@ class IceCreamService
             $this->eventRepository->markAsProcessed($event['id']);
         }
     }
+
+    public function getIceStatsByRfid($rfid)
+    {
+        return $this->iceCreamRepository->getIceStatsByRfid($rfid);
+    }
 }

@@ -82,13 +82,37 @@ class IceCreamRepository
 
         $stmt = $this->connection->prepare($sql);
         if (!$stmt->execute()) {
-            throw new \Exception('IceCreamRepository: Error with executing query 2.');
+            throw new \Exception('IceCreamRepository: Error with executing query 3.');
         }
 
         $result = 0;
         $values = $stmt->fetchall(\PDO::FETCH_ASSOC);
         foreach ($values as $item) {
             $result = $item['count'];
+        }
+
+        return $result;
+    }
+
+    public function getIceStatsByRfid($rfid)
+    {
+        $sql = "SELECT count as totalAmount, paid as totalPaid FROM ice_counts WHERE user = :rfid";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue("rfid", $rfid);
+
+        if (!$stmt->execute()) {
+            throw new \Exception('IceCreamRepository: Error with executing query 4.');
+        }
+
+        $result = [
+            'totalAmount' => 0,
+            'totalPaid' => 0
+        ];
+        $values = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        foreach ($values as $value) {
+            $result['totalAmount'] += $value['totalAmount'];
+            $result['totalPaid'] += $value['totalPaid'];
         }
 
         return $result;

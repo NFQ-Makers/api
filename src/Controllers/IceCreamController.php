@@ -97,18 +97,39 @@ class IceCreamController
         }
 
         $result = ["user" => $user];
-        $data   = $this->iceCreamService->getUserStatusByUserId($user['id']);
-        $total  = 0;
-        foreach ($data as $item) {
-            $total += $item->getAmount();
-        }
+//        $data   = $this->iceCreamService->getUserStatusByUserId($user['id']);
+//
+//        $total  = 0;
+//        foreach ($data as $item) {
+//            $total += $item->getAmount();
+//        }
 
         $counts = $this->iceCreamService->getIceCountByUserId($user['id']);
 
-        $result["info"]["totalAmount"] = $total;
+        $result["info"]["totalAmount"] = $counts['userCount'];
         $result["info"]["text"] = "Suvalgei dar tik <b>" .
             $counts['userCount'] . "</b>. Pavyk kolegą, kuris jau suėdė " . $counts['max'];
 
         return new JsonResponse($result, 200);
+    }
+
+    public function userInfoByRfids($rfids)
+    {
+        $rfids = explode(",", $rfids);
+
+        $result = [
+            'totalAmount' => 0,
+            'totalPaid' => 0
+        ];
+
+        foreach ($rfids as $rfid) {
+            $stats = $this->iceCreamService->getIceStatsByRfid(trim(ltrim($rfid, "0")));
+            $result['totalAmount'] += $stats['totalAmount'];
+            $result['totalPaid'] += $stats['totalPaid'];
+        }
+
+        $result['text'] = "Ar šiandien jau valgei ledų?";
+
+        return new JsonResponse(['info' => $result], 200);
     }
 }

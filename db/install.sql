@@ -94,5 +94,7 @@ CREATE TABLE IF NOT EXISTS `soccer_match` (
 --
 CREATE ALGORITHM=UNDEFINED DEFINER=`maker`@`localhost` SQL SECURITY DEFINER VIEW `ice_counts`
 AS SELECT
-   sum(substr(`ev`.`data`,11,1)) AS `count`,trim(leading '0'
-FROM substring_index(substring_index(`ev`.`data`,'"',-(2)),'"',1)) AS `user` from `events_log` `ev` group by substring_index(substring_index(`ev`.`data`,'"',-(2)),'"',1);
+   sum(IF(substr(`ev`.`data`,11,1) > 0, substr(`ev`.`data`,11,1), 0)) AS `count`,
+   sum(IF(substr(`ev`.`data`,11,2) < 0, substr(`ev`.`data`,11,2)*-1, 0)) AS `paid`,
+   trim(leading '0' FROM substring_index(substring_index(`ev`.`data`,'"',-(2)),'"',1)) AS `user`
+from `events_log` `ev` group by substring_index(substring_index(`ev`.`data`,'"',-(2)),'"',1);
