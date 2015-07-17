@@ -23,12 +23,11 @@ CREATE TABLE IF NOT EXISTS `events_log` (
 CREATE TABLE IF NOT EXISTS `ice_cream` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
-  `deviceId` int(11) NOT NULL,
+  `deviceId` varchar(255) NOT NULL,
   `amount` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
 
 
 --
@@ -94,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `soccer_match` (
 --
 CREATE ALGORITHM=UNDEFINED DEFINER=`maker`@`localhost` SQL SECURITY DEFINER VIEW `ice_counts`
 AS SELECT
-   sum(IF(substr(`ev`.`data`,11,1) > 0, substr(`ev`.`data`,11,1), 0)) AS `count`,
-   sum(IF(substr(`ev`.`data`,11,2) < 0, substr(`ev`.`data`,11,2)*-1, 0)) AS `paid`,
-   trim(leading '0' FROM substring_index(substring_index(`ev`.`data`,'"',-(2)),'"',1)) AS `user`
-from `events_log` `ev` group by substring_index(substring_index(`ev`.`data`,'"',-(2)),'"',1);
+   sum(IF(`ic`.`amount` > 0, `ic`.`amount`, 0)) AS `count`,
+   sum(IF(`ic`.`amount` < 0, `ic`.`amount`*-1, 0)) AS `paid`,
+   userId AS `user`
+from `ice_cream` `ic` group by userId;
