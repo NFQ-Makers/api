@@ -21,4 +21,5 @@ $application->add(new \Command\TableSimulatorCommand());
 $command = new \Command\UserImportCommand();
 $command->setApplication($application);
 $application->add($command);
+$application->add(new \Command\ParseIceCreamCommand());
 $application->run();

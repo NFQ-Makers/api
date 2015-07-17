@@ -8,6 +8,7 @@ class IceCream extends BaseModel
 
     // types
     const TYPE_ICE_CREAM = "IceCream";
+    const TYPE_ICE_CREAM_PAY = "IceCreamPay";
 
 
     /**
@@ -35,9 +36,12 @@ class IceCream extends BaseModel
      */
     protected $timestamp;
 
-    static function getTypes()
+    public static function getTypes()
     {
-        return array(self::TYPE_ICE_CREAM => self::TYPE_ICE_CREAM);
+        return array(
+            self::TYPE_ICE_CREAM => self::TYPE_ICE_CREAM,
+            self::TYPE_ICE_CREAM_PAY => self::TYPE_ICE_CREAM_PAY,
+        );
     }
 
     /**

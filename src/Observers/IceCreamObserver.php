@@ -25,7 +25,17 @@ class IceCreamObserver extends Observer
      *
      * @param $subject
      */
-    function subjectActionIceCream($subject)
+    public function subjectActionIceCream($subject)
+    {
+        $this->iceCreamService->processEvent($subject->getEventId());
+    }
+
+    /**
+     * Event "IceCreamPay" catcher
+     *
+     * @param $subject
+     */
+    public function subjectActionIceCreamPay($subject)
     {
         $this->iceCreamService->processEvent($subject->getEventId());
     }
